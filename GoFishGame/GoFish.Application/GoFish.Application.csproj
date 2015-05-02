@@ -47,6 +47,12 @@
   <ItemGroup>
     <Folder Include="Games\DTOs\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GoFish.Domain\GoFish.Domain.csproj">
+      <Project>{45292ce6-86e1-424d-a5e9-027ca905efdc}</Project>
+      <Name>GoFish.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

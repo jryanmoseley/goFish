@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GoFish.Infrastructure.InMemory
 {
-    public class InMemoryPlayerRepository : IPlayerRepository<Player>
+    public class InMemoryPlayerRepository : IPlayerRepository
     {
         public void Save(Player entity)
         {
@@ -21,7 +21,7 @@ namespace GoFish.Infrastructure.InMemory
 
         public Player Get(string id)
         {
-            return new Player();
+            return new Player(new PlayerId(id));
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GoFish.Domain.Games
 {
-    interface IGameRepository<Game> : IRepository<Game>
+    public interface IGameRepository : IRepository<Game>
     {
     }
 }

@@ -40,13 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Games\Commands\StartNewGame.cs" />
+    <Compile Include="Games\DTOs\CardDTO.cs" />
+    <Compile Include="Games\DTOs\GameDTO.cs" />
     <Compile Include="Games\GameApplicationService.cs" />
     <Compile Include="Games\IGameApplicationService.cs" />
+    <Compile Include="Players\DTOs\PlayerDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Games\DTOs\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\GoFish.Domain\GoFish.Domain.csproj">
       <Project>{45292ce6-86e1-424d-a5e9-027ca905efdc}</Project>

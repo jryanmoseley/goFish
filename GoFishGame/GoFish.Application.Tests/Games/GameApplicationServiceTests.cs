@@ -1,4 +1,5 @@
 ﻿using GoFish.Application.Games;
+using GoFish.Application.Games.Commands;
 using GoFish.Domain.Games;
 using GoFish.Domain.Players;
 using GoFish.Infrastructure.InMemory;
@@ -26,13 +27,27 @@ namespace GoFish.Application.Tests.Games
             _playerRepository = new InMemoryPlayerRepository();
         }
 
+        [Ignore]
         [TestMethod]
-        public void When_New_Game_Started_With_Two_Players__Each_Player_Gets_Seven_Cards()
+        public void When_New_Game_Started_With_Two_Players_Each_Player_Gets_Seven_Cards()
         {
             var player1 = new Player(new PlayerId("player1"));
             var player2 = new Player(new PlayerId("player2"));
 
+            _playerRepository.Save(player1);
+            _playerRepository.Save(player2);
 
+            var newGame = new StartNewGame(new List<string> { player1.Id.ToString(), player2.Id.ToString() });
+
+            var gameId = _gameApplicationService.StartNewGame(newGame);
+
+            var game = _gameApplicationService.GetGame(gameId);
+
+            Assert.AreEqual(gameId, game.Id);
+            Assert.AreEqual(2, game.Players.Count);
+            Assert.AreEqual(7, game.Players.Single(p => p.Key.Id == player1.Id.ToString()).Value.Count());
+            Assert.AreEqual(7, game.Players.Single(p => p.Key.Id == player2.Id.ToString()).Value.Count());
+            Assert.AreEqual(38, game.Stock.Count);
         }
     }
 }

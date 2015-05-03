@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{45292CE6-86E1-424D-A5E9-027CA905EFDC}</ProjectGuid>
+    <ProjectGuid>{055A80CC-0BBE-425B-929A-ACBCE6AF4F9F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GoFish.Domain</RootNamespace>
-    <AssemblyName>GoFish.Domain</AssemblyName>
+    <RootNamespace>GoFish.Domain.Tests</RootNamespace>
+    <AssemblyName>GoFish.Domain.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,20 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\IRepository.cs" />
-    <Compile Include="Games\Card.cs" />
-    <Compile Include="Games\CardValue.cs" />
-    <Compile Include="Games\CardDeck.cs" />
-    <Compile Include="Games\Game.cs" />
-    <Compile Include="Games\GameId.cs" />
-    <Compile Include="Games\IGameRepository.cs" />
-    <Compile Include="Players\IPlayerRepository.cs" />
-    <Compile Include="Players\Player.cs" />
-    <Compile Include="Players\PlayerId.cs" />
+    <Compile Include="Games\DeckTests.cs" />
+    <Compile Include="Games\GameTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Players\Events\" />
+    <ProjectReference Include="..\GoFish.Domain\GoFish.Domain.csproj">
+      <Project>{45292ce6-86e1-424d-a5e9-027ca905efdc}</Project>
+      <Name>GoFish.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

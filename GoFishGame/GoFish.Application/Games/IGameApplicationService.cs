@@ -1,4 +1,5 @@
 ﻿using GoFish.Application.Games.Commands;
+using GoFish.Application.Games.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace GoFish.Application.Games
     public interface IGameApplicationService
     {
         string StartNewGame(StartNewGame game);
+
+        GameDTO GetGame(string gameId);
     }
 }

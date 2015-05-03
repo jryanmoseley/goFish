@@ -8,7 +8,7 @@ namespace GoFish.Domain.Players
 {
     public class Player
     {
-        private PlayerId Id;
+        public PlayerId Id { get; private set; }
 
         public Player(PlayerId id)
         {

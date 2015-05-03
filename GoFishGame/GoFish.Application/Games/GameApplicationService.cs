@@ -1,4 +1,5 @@
 ﻿using GoFish.Application.Games.Commands;
+using GoFish.Application.Games.DTOs;
 using GoFish.Domain.Games;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,17 @@ namespace GoFish.Application.Games
 
         public string StartNewGame(StartNewGame game)
         {
-            return string.Empty;
+            var gameId = new GameId(Guid.NewGuid().ToString());
+            //var game = new Game();
+
+            return Guid.NewGuid().ToString();
+        }
+
+        public GameDTO GetGame(string gameId)
+        {
+            var game = _gameRepository.Get(gameId);
+
+            return new GameDTO();
         }
     }
 }

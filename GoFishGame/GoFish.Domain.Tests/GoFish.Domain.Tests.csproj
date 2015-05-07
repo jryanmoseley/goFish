@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ExceptionAssert.cs" />
     <Compile Include="Games\CardDeckTests.cs" />
     <Compile Include="Games\GameTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

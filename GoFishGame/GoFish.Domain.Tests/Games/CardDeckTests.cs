@@ -14,19 +14,15 @@ namespace GoFish.Domain.Tests.Games
         [TestMethod]
         public void Can_Shuffle_CardDeck()
         {
-            var deck = new CardDeck();
-
-            var deckBeforeShuffle = deck.Cards;
-
-            deck.Shuffle();
-
-            var deckAfterShuffle = deck.Cards;
+            var cardDeck = new CardDeck();
+            var firstDeck = cardDeck.GetShuffledCards();
+            var secondDeck = cardDeck.GetShuffledCards();
 
             var cardsInSamePosition = 0;
 
             for(var i = 0; i < 52; i++)
             {
-                if (deckBeforeShuffle[i].Value == deckAfterShuffle[i].Value)
+                if (firstDeck[i].Value == secondDeck[i].Value)
                     cardsInSamePosition++;
             }
 

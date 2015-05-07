@@ -8,27 +8,32 @@ namespace GoFish.Domain.Games
 {
     public class CardDeck
     {
+        private static Random _random;
+
         public CardDeck()
         {
-            Cards = NewCardDeck();
+            _random = new Random();
         }
 
-        public List<Card> Cards { get; private set; }
-
-        public void Shuffle()
+        public List<Card> GetShuffledCards()
         {
             var newDeck = NewCardDeck();
-            var shuffledCards = new List<Card>();
-            var random = new Random();
+            var shuffledCards = ShuffleCards(newDeck);
+            return shuffledCards;
+        }
 
-            while(shuffledCards.Count < 52)
+        private static List<Card> ShuffleCards(List<Card> cards)
+        {
+            var shuffledCards = new List<Card>();
+
+            while (shuffledCards.Count < 52)
             {
-                var cardIndex = random.Next(0, newDeck.Count - 1);
-                shuffledCards.Add(newDeck[cardIndex]);
-                newDeck.RemoveAt(cardIndex);
+                var cardIndex = _random.Next(0, cards.Count - 1);
+                shuffledCards.Add(cards[cardIndex]);
+                cards.RemoveAt(cardIndex);
             }
 
-            Cards = shuffledCards;
+            return shuffledCards;
         }
 
         private static List<Card> NewCardDeck()

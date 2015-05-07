@@ -20,14 +20,51 @@ namespace GoFish.Domain.Games
             if (id == null)
                 throw new InvalidOperationException("Game id is required.");
 
-            Id = id;
             _deck = new CardDeck();
+
+            Id = id;
+            Players = new Dictionary<PlayerId, List<Card>>();
             Stock = new List<Card>();
         }
 
-        public void StartNewGame(List<PlayerId> Players)
+        public void StartNewGame(List<PlayerId> players)
         {
+            if (players.Count < 2 || players.Count > 5)
+                throw new InvalidOperationException("New game requires two to five players.");
 
+            AddPlayersToGame(players);
+
+            DealGame();
+        }
+
+        private void AddPlayersToGame(List<PlayerId> players)
+        {
+            foreach (var player in players)
+                Players.Add(player, new List<Card>());
+        }
+
+        private void DealGame()
+        {
+            if (Players.Count < 4)
+                DealCards(7);
+            else
+                DealCards(5);
+        }
+
+        private void DealCards(int numberOfCardsPerPlayer)
+        {
+            var cards = _deck.GetShuffledCards();
+
+            for (var i = 0; i < numberOfCardsPerPlayer; i++)
+            {
+                foreach (var player in Players)
+                {
+                    player.Value.Add(cards[0]);
+                    cards.RemoveAt(0);
+                }
+            }
+
+            Stock = cards;
         }
     }
 }

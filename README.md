@@ -1,2 +1,2 @@
-# goFish - Domain Driven Design
-goFish Card game based on Domain Driven Design
+# goFish - DDD
+goFish Card game applying Domain Driven Design

@@ -9,10 +9,12 @@ namespace GoFish.Domain.Games
     public class Card
     {
         public CardValue Value { get; private set; }
+        public CardSuit Suit { get; private set; }
 
-        public Card(CardValue cardValue)
+        public Card(CardValue cardValue, CardSuit cardSuit)
         {
             Value = cardValue;
+            Suit = cardSuit;
         }
     }
 }

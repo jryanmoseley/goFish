@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Common\IRepository.cs" />
     <Compile Include="Games\Card.cs" />
+    <Compile Include="Games\CardSuit.cs" />
     <Compile Include="Games\CardValue.cs" />
     <Compile Include="Games\CardDeck.cs" />
     <Compile Include="Games\Game.cs" />

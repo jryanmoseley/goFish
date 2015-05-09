@@ -1,4 +1,5 @@
 ﻿using GoFish.Domain.Games;
+using GoFish.Domain.Players;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace GoFish.Infrastructure.InMemory
 
         public Game Get(string id)
         {
-            return new Game(new GameId(id));
+            return new Game(new GameId(id), new List<PlayerId>());
         }
     }
 }

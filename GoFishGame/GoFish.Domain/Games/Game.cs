@@ -1,4 +1,7 @@
-﻿using GoFish.Domain.Players;
+﻿using GoFish.Domain.Common;
+using GoFish.Domain.Games.Events;
+using GoFish.Domain.Games.States;
+using GoFish.Domain.Players;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,32 +10,41 @@ using System.Threading.Tasks;
 
 namespace GoFish.Domain.Games
 {
-    public class Game
+    public class Game : Entity
     {
-        private CardDeck _deck;
+        private CardDeck _cardDeck;
 
-        public GameId Id { get; private set; }
-        public Dictionary<PlayerId, List<Card>> Players { get; private set; }
-        public List<Card> Stock { get; private set; }
-        public List<PlayerId> TurnOrder { get; private set; }
-        public PlayerId PlayerTurn { get; private set; }
-        public CardRequest CurrentRequest { get; private set; }
-
-        public Game(GameId id, List<PlayerId> players)
+        public Game(GameId gameId, List<PlayerId> players, CardDeck cardDeck)
         {
-            if (id == null)
+            if (gameId == null)
                 throw new InvalidOperationException("Game id is required.");
 
-            _deck = new CardDeck();
+            _cardDeck = cardDeck;
 
-            Id = id;
-            Players = new Dictionary<PlayerId, List<Card>>();
+            GameId = gameId;
+            Players = new List<GamePlayer>();
             Stock = new List<Card>();
 
             StartNewGame(players);
         }
 
-        public void PlayerRequestCards(CardRequest request)
+        public GameId GameId { get; private set; }
+        public List<GamePlayer> Players { get; private set; }
+        public List<Card> Stock { get; private set; }
+        public List<PlayerId> TurnOrder { get; private set; }
+        public PlayerId PlayerTurn { get; private set; }
+        public GameState State { get; private set; }
+
+        public void PlayerRequestCard(CardRequest request)
+        {
+            ValidateRequest(request);
+
+            State = new CardRequestedState(request);
+            PlayerTurn = request.Requestee;
+            Events.Add(new CardRequested(GameId, request));
+        }
+
+        private void ValidateRequest(CardRequest request)
         {
             if (PlayerTurn.Id != request.Requestor.Id)
                 throw new InvalidOperationException("It is not your turn.");
@@ -40,8 +52,11 @@ namespace GoFish.Domain.Games
             if (RequestorDoesNotHoldRequestedCard(request))
                 throw new InvalidOperationException("You can only request cards that you have.");
 
-            CurrentRequest = request;
-            PlayerTurn = request.Requestee;
+            if (request.Requestee == request.Requestor)
+                throw new InvalidOperationException("You cannot request cards from yourself.");
+
+            if (!Players.Any(x => x.PlayerId == request.Requestee))
+                throw new InvalidOperationException("Requestee is not a player in this game.");
         }
 
         private void StartNewGame(List<PlayerId> players)
@@ -59,7 +74,7 @@ namespace GoFish.Domain.Games
         private void AddPlayersToGame(List<PlayerId> players)
         {
             foreach (var player in players)
-                Players.Add(player, new List<Card>());
+                Players.Add(new GamePlayer(player));
         }
 
         private void DealGame()
@@ -78,13 +93,13 @@ namespace GoFish.Domain.Games
 
         private void DealCards(int numberOfCardsPerPlayer)
         {
-            var cards = _deck.GetShuffledCards();
+            var cards = _cardDeck.GetShuffledCards();
 
             for (var i = 0; i < numberOfCardsPerPlayer; i++)
             {
                 foreach (var player in Players)
                 {
-                    player.Value.Add(cards[0]);
+                    player.DealCard(cards[0]);
                     cards.RemoveAt(0);
                 }
             }
@@ -94,7 +109,8 @@ namespace GoFish.Domain.Games
 
         private bool RequestorDoesNotHoldRequestedCard(CardRequest request)
         {
-            return !Players[request.Requestor].Any(x => x.Value == request.Card);
+            return !Players.Single(x => x.PlayerId == request.Requestor)
+                .Cards.Any(x => x.Value == request.CardRank);
         }
     }
 }

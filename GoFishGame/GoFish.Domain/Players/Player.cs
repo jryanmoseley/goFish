@@ -8,11 +8,11 @@ namespace GoFish.Domain.Players
 {
     public class Player
     {
-        public PlayerId Id { get; private set; }
+        public PlayerId PlayerId { get; private set; }
 
         public Player(PlayerId id)
         {
-            Id = id;
+            PlayerId = id;
         }
     }
 }

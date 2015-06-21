@@ -22,7 +22,7 @@ namespace GoFish.Infrastructure.InMemory
 
         public Game Get(string id)
         {
-            return new Game(new GameId(id), new List<PlayerId>());
+            return new Game(new GameId(id), new List<PlayerId>(), new CardDeck());
         }
     }
 }

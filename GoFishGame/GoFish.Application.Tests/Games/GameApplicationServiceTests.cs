@@ -37,7 +37,7 @@ namespace GoFish.Application.Tests.Games
             _playerRepository.Save(player1);
             _playerRepository.Save(player2);
 
-            var newGame = new StartNewGame(new List<string> { player1.Id.ToString(), player2.Id.ToString() });
+            var newGame = new StartNewGame(new List<string> { player1.PlayerId.ToString(), player2.PlayerId.ToString() });
 
             var gameId = _gameApplicationService.StartNewGame(newGame);
 
@@ -45,8 +45,8 @@ namespace GoFish.Application.Tests.Games
 
             Assert.AreEqual(gameId, game.Id);
             Assert.AreEqual(2, game.Players.Count);
-            Assert.AreEqual(7, game.Players.Single(p => p.Key.Id == player1.Id.ToString()).Value.Count());
-            Assert.AreEqual(7, game.Players.Single(p => p.Key.Id == player2.Id.ToString()).Value.Count());
+            Assert.AreEqual(7, game.Players.Single(p => p.Key.Id == player1.PlayerId.ToString()).Value.Count());
+            Assert.AreEqual(7, game.Players.Single(p => p.Key.Id == player2.PlayerId.ToString()).Value.Count());
             Assert.AreEqual(38, game.Stock.Count);
         }
     }

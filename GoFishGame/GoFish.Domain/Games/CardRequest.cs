@@ -6,13 +6,13 @@ namespace GoFish.Domain.Games
     {
         public PlayerId Requestor { get; private set; }
         public PlayerId Requestee { get; private set; }
-        public CardValue Card { get; private set; }
+        public CardRank CardRank { get; private set; }
 
-        public CardRequest(PlayerId requestor, PlayerId requestee, CardValue card)
+        public CardRequest(PlayerId requestor, PlayerId requestee, CardRank cardRank)
         {
             Requestor = requestor;
             Requestee = requestee;
-            Card = card;
+            CardRank = cardRank;
         }
     }
 }

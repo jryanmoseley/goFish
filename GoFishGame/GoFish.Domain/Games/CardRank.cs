@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GoFish.Domain.Games
 {
-    public enum CardValue
+    public enum CardRank
     {
         Two,
         Three,

@@ -39,14 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Entity.cs" />
+    <Compile Include="Common\IDomainEvent.cs" />
     <Compile Include="Common\IRepository.cs" />
     <Compile Include="Games\Card.cs" />
     <Compile Include="Games\CardRequest.cs" />
     <Compile Include="Games\CardSuit.cs" />
-    <Compile Include="Games\CardValue.cs" />
+    <Compile Include="Games\CardRank.cs" />
     <Compile Include="Games\CardDeck.cs" />
+    <Compile Include="Games\Events\CardRequested.cs" />
     <Compile Include="Games\Game.cs" />
     <Compile Include="Games\GameId.cs" />
+    <Compile Include="Games\GamePlayer.cs" />
+    <Compile Include="Games\States\CardRequestedState.cs" />
+    <Compile Include="Games\States\GameState.cs" />
     <Compile Include="Games\IGameRepository.cs" />
     <Compile Include="Players\IPlayerRepository.cs" />
     <Compile Include="Players\Player.cs" />

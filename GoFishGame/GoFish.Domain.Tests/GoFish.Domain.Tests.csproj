@@ -42,7 +42,10 @@
   <ItemGroup>
     <Compile Include="Common\ExceptionAssert.cs" />
     <Compile Include="Games\CardDeckTests.cs" />
-    <Compile Include="Games\GameTests.cs" />
+    <Compile Include="Games\GameTestsBase.cs" />
+    <Compile Include="Games\NewGameTests.cs" />
+    <Compile Include="Games\HandOverCardsTests.cs" />
+    <Compile Include="Games\RequestCardsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

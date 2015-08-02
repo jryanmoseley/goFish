@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace GoFish.Domain.Tests.Games
 {
     [TestClass]
-    public class RequestCardsTests : GameTestsBase
+    public class RequestCardTests : GameTestsBase
     {
         [TestMethod]
         public void When_PlayerRequestsCard_AndItIsNotTheirTurn_ExceptionIsThrown()
@@ -40,8 +40,8 @@ namespace GoFish.Domain.Tests.Games
             var requestee = new PlayerId("non player");
 
             var requestorCards = game.Players.Single(x => x.PlayerId == requestor).Cards;
-            var cardToRequest = game.Stock.First(x => requestorCards.Any(c => c.Value == x.Value));
-            var cardRequest = new CardRequest(requestor, requestee, cardToRequest.Value);
+            var cardToRequest = game.Stock.First(x => requestorCards.Any(c => c.Rank == x.Rank));
+            var cardRequest = new CardRequest(requestor, requestee, cardToRequest.Rank);
 
             ExceptionAssert.Throws<InvalidOperationException>(() =>
                 game.PlayerRequestCard(cardRequest), "Requestee is not a player in this game.");
@@ -57,9 +57,9 @@ namespace GoFish.Domain.Tests.Games
             var requestee = players[1];
 
             var requestorCards = game.Players.Single(x => x.PlayerId == requestor).Cards;
-            var cardTheyDontHave = game.Stock.First(x => !requestorCards.Any(c => c.Value == x.Value));
+            var cardTheyDontHave = game.Stock.First(x => !requestorCards.Any(c => c.Rank == x.Rank));
 
-            var cardRequest = new CardRequest(requestor, requestee, cardTheyDontHave.Value);
+            var cardRequest = new CardRequest(requestor, requestee, cardTheyDontHave.Rank);
 
             ExceptionAssert.Throws<InvalidOperationException>(() =>
                 game.PlayerRequestCard(cardRequest), "You can only request cards that you have.");
@@ -75,9 +75,9 @@ namespace GoFish.Domain.Tests.Games
             var requestee = players[0];
 
             var requestorCards = game.Players.Single(x => x.PlayerId == requestor).Cards;
-            var cardToRequest = game.Stock.First(x => requestorCards.Any(c => c.Value == x.Value));
+            var cardToRequest = game.Stock.First(x => requestorCards.Any(c => c.Rank == x.Rank));
 
-            var cardRequest = new CardRequest(requestor, requestee, cardToRequest.Value);
+            var cardRequest = new CardRequest(requestor, requestee, cardToRequest.Rank);
 
             ExceptionAssert.Throws<InvalidOperationException>(() =>
                 game.PlayerRequestCard(cardRequest), "You cannot request cards from yourself.");
@@ -93,8 +93,8 @@ namespace GoFish.Domain.Tests.Games
             var requestee = players[1];
 
             var requestorCards = game.Players.Single(x => x.PlayerId == requestor).Cards;
-            var cardToRequest = game.Stock.First(x => requestorCards.Any(c => c.Value == x.Value));
-            var cardRequest = new CardRequest(requestor, requestee, cardToRequest.Value);
+            var cardToRequest = game.Stock.First(x => requestorCards.Any(c => c.Rank == x.Rank));
+            var cardRequest = new CardRequest(requestor, requestee, cardToRequest.Rank);
 
             game.PlayerRequestCard(cardRequest);
 

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Games\Commands\RequestCard.cs" />
     <Compile Include="Games\Commands\StartNewGame.cs" />
     <Compile Include="Games\DTOs\CardDTO.cs" />
     <Compile Include="Games\DTOs\GameDTO.cs" />

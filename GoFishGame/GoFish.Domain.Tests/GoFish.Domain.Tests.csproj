@@ -45,7 +45,7 @@
     <Compile Include="Games\GameTestsBase.cs" />
     <Compile Include="Games\NewGameTests.cs" />
     <Compile Include="Games\HandOverCardsTests.cs" />
-    <Compile Include="Games\RequestCardsTests.cs" />
+    <Compile Include="Games\RequestCardTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

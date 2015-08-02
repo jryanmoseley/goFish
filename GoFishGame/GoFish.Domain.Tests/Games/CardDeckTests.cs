@@ -22,7 +22,7 @@ namespace GoFish.Domain.Tests.Games
 
             for(var i = 0; i < 52; i++)
             {
-                if (firstDeck[i].Value == secondDeck[i].Value)
+                if (firstDeck[i].Rank == secondDeck[i].Rank)
                     cardsInSamePosition++;
             }
 

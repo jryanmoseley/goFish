@@ -1,11 +1,8 @@
 ﻿using GoFish.Application.Games.Commands;
-using GoFish.Application.Games.DTOs;
 using GoFish.Domain.Games;
+using GoFish.Domain.Players;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoFish.Application.Games
 {
@@ -18,19 +15,29 @@ namespace GoFish.Application.Games
             _gameRepository = gameRepository;
         }
 
-        public string StartNewGame(StartNewGame game)
+        public string StartNewGame(StartNewGame command)
         {
             var gameId = new GameId(Guid.NewGuid().ToString());
-            //var game = new Game();
+            var players = command.PlayerIds.Select(p => new PlayerId(p)).ToList();
 
-            return Guid.NewGuid().ToString();
+            var game = new Game(gameId, players, new CardDeck());
+            _gameRepository.Save(game);
+
+            return gameId.ToString();
         }
 
-        public GameDTO GetGame(string gameId)
+        public void RequestCard(RequestCard command)
         {
-            var game = _gameRepository.Get(gameId);
+            var game = _gameRepository.Get(new GameId(command.GameId));
 
-            return new GameDTO();
+            var cardRequest = new CardRequest(
+                new PlayerId(command.Requestor),
+                new PlayerId(command.Requestee),
+                CardRankExtensions.ToEnum(command.CardRank));
+
+            game.PlayerRequestCard(cardRequest);
+
+            _gameRepository.Save(game);
         }
     }
 }

@@ -46,16 +46,16 @@ namespace GoFish.Domain.Games
 
         private void ValidateRequest(CardRequest request)
         {
-            if (PlayerTurn.Id != request.Requestor.Id)
+            if (!PlayerTurn.Equals(request.Requestor))
                 throw new InvalidOperationException("It is not your turn.");
 
             if (RequestorDoesNotHoldRequestedCard(request))
                 throw new InvalidOperationException("You can only request cards that you have.");
 
-            if (request.Requestee == request.Requestor)
+            if (request.Requestee.Equals(request.Requestor))
                 throw new InvalidOperationException("You cannot request cards from yourself.");
 
-            if (!Players.Any(x => x.PlayerId == request.Requestee))
+            if (!Players.Any(x => x.PlayerId.Equals(request.Requestee)))
                 throw new InvalidOperationException("Requestee is not a player in this game.");
         }
 
@@ -109,8 +109,8 @@ namespace GoFish.Domain.Games
 
         private bool RequestorDoesNotHoldRequestedCard(CardRequest request)
         {
-            return !Players.Single(x => x.PlayerId == request.Requestor)
-                .Cards.Any(x => x.Value == request.CardRank);
+            return !Players.Single(x => x.PlayerId.Equals(request.Requestor))
+                .Cards.Any(x => x.Rank.Equals(request.CardRank));
         }
     }
 }

@@ -22,4 +22,12 @@ namespace GoFish.Domain.Games
         King,
         Ace
     }
+
+    public static class CardRankExtensions
+    {
+        public static CardRank ToEnum(string cardRank)
+        {
+            return (CardRank)Enum.Parse(typeof(CardRank), cardRank);
+        }
+    }
 }

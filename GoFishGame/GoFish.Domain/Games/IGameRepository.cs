@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace GoFish.Domain.Games
 {
-    public interface IGameRepository : IRepository<Game>
+    public interface IGameRepository
     {
+        void Save(Game game);
+        IEnumerable<Game> GetAll();
+        Game Get(GameId gameId);
     }
 }

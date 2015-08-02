@@ -40,7 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Games\GameApplicationServiceTests.cs" />
+    <Compile Include="Common\ExceptionAssert.cs" />
+    <Compile Include="Games\GameApplicationServiceSpecBase.cs" />
+    <Compile Include="Games\RequestCardSpecs.cs" />
+    <Compile Include="Games\StartNewGameSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

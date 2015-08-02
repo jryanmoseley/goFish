@@ -17,5 +17,17 @@ namespace GoFish.Domain.Players
 
             Id = id;
         }
+
+        public override bool Equals(object obj)
+        {
+            var playerId = obj as PlayerId;
+            if (playerId == null) return false;
+            return Id == playerId.Id;
+        }
+
+        public override string ToString()
+        {
+            return Id;
+        }
     }
 }

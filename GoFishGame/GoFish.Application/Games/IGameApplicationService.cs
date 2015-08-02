@@ -10,8 +10,7 @@ namespace GoFish.Application.Games
 {
     public interface IGameApplicationService
     {
-        string StartNewGame(StartNewGame game);
-
-        GameDTO GetGame(string gameId);
+        string StartNewGame(StartNewGame command);
+        void RequestCard(RequestCard command);
     }
 }

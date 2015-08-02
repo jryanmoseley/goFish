@@ -8,12 +8,12 @@ namespace GoFish.Domain.Games
 {
     public class Card
     {
-        public CardRank Value { get; private set; }
+        public CardRank Rank { get; private set; }
         public CardSuit Suit { get; private set; }
 
-        public Card(CardRank cardValue, CardSuit cardSuit)
+        public Card(CardRank cardRank, CardSuit cardSuit)
         {
-            Value = cardValue;
+            Rank = cardRank;
             Suit = cardSuit;
         }
     }

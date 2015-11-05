@@ -1,5 +1,5 @@
-# goFish - DDD
-goFish Card game applying Domain Driven Design
+# goFish - DDD Tactical
+goFish Card game applying Domain Driven Design Tactical Patterns
 
 Game Rules / Instructions
 Rank of Cards
